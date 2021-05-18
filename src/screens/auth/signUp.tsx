@@ -131,7 +131,7 @@ const SignUp = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            We-deposit
+            W-DEPOSIT FINANCIAL MANAGMENT TOOL
           </Typography>
         </Toolbar>
       </AppBar>
