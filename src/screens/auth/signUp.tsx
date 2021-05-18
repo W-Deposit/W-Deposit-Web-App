@@ -26,6 +26,7 @@ import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import MobileFriendlyIcon from "@material-ui/icons/MobileFriendly";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import InfoIcon from "@material-ui/icons/Info";
+import AppsIcon from "@material-ui/icons/Apps";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -160,6 +161,17 @@ const SignUp = () => {
 
         <Divider />
         <List>
+          <ListItem button className={classes.button}>
+            <ListItemIcon>
+              <AppsIcon
+                style={{
+                  color: "#ffff",
+                }}
+                fontSize="large"
+              />
+            </ListItemIcon>
+            <ListItemText>Home</ListItemText>
+          </ListItem>
           <ListItem button className={classes.button}>
             <ListItemIcon>
               <MonetizationOnIcon
