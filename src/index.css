@@ -1,13 +1,19 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: "Rubik";
+  src: local("Rubik"),
+    url(./theme/fonts/Rubik/Rubik-VariableFont_wght.ttf) format("opentype");
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: "Roboto";
+  font-weight: 900;
+  src: local("Roboto"),
+    url(./theme/fonts/Roboto/Roboto-Black.ttf) format("opentype");
+}
+
+@font-face {
+  font-family: "Work Sans";
+  font-weight: 700;
+  src: local("Work Sans "),
+    url(./theme/fonts/work-sans/WorkSans-SemiBold.ttf) format("opentype");
 }
