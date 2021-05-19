@@ -1,5 +1,5 @@
 import SignUp from "../screens/auth/signUp";
-import CheckAccount from "../screens/checkAccount";
+import TopUp from "../screens/sendMoney/topUp";
 export const Routes = [
   {
     path: "/",
@@ -9,11 +9,11 @@ export const Routes = [
     component: SignUp,
   },
   {
-    path: "/checkAccount",
-    name: "checkAccount",
-    title: "CHECK_ACCOUNT",
+    path: "/topUp",
+    name: "topUp",
+    title: "TOP_UP",
     exact: true,
-    component: CheckAccount,
+    component: TopUp,
   },
 ];
 
