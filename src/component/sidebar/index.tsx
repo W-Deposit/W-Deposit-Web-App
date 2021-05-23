@@ -229,7 +229,7 @@ const SideBar = () => {
               <ListItemText>Check Balance</ListItemText>
             </ListItem>
           </NavLink>
-          <NavLink to="/mobile" className={classes.removeUnderLiner}>
+          <NavLink to="/" className={classes.removeUnderLiner}>
             <ListItem button className={classes.button}>
               <ListItemIcon>
                 <MobileFriendlyIcon
@@ -242,7 +242,7 @@ const SideBar = () => {
               <ListItemText>Mobile money</ListItemText>
             </ListItem>
           </NavLink>
-          <NavLink to="/history" className={classes.removeUnderLiner}>
+          <NavLink to="/transactions" className={classes.removeUnderLiner}>
             <ListItem button className={classes.button}>
               <ListItemIcon>
                 <ReceiptIcon
