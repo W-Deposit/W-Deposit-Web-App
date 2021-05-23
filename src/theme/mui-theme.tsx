@@ -3,7 +3,7 @@ import Fonts from "./fonts";
 export const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#009DF5",
+      main: "#ff7400",
       contrastText: "#fff",
     },
     secondary: {

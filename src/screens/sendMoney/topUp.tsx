@@ -33,7 +33,7 @@ import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Deposits from "../../component/metrx/deposit";
 import Orders from "../../component/metrx/order";
-import Chart from "../../component/metrx/chart";
+import TopUpChart from "../../component/metrx/topUpChart";
 import { NavLink } from "react-router-dom";
 
 const drawerWidth = 220;
@@ -120,7 +120,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: "column",
     },
     fixedHeight: {
-      height: 240,
+      height: 400,
     },
     removeUnderLiner: {
       textDecoration: "none",
@@ -139,7 +139,7 @@ function Copyright() {
     </Typography>
   );
 }
-export default function MiniDrawer() {
+const TopUp = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -297,7 +297,7 @@ export default function MiniDrawer() {
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
-                <Chart />
+                <TopUpChart />
               </Paper>
             </Grid>
             {/* Recent Deposits */}
@@ -307,11 +307,6 @@ export default function MiniDrawer() {
               </Paper>
             </Grid>
             {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
-            </Grid>
           </Grid>
           <Box pt={4}>
             <Copyright />
@@ -320,4 +315,5 @@ export default function MiniDrawer() {
       </main>
     </div>
   );
-}
+};
+export default TopUp;
