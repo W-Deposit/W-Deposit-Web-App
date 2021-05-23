@@ -120,7 +120,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: "column",
     },
     fixedHeight: {
-      height: 240,
+      height: 400,
     },
     removeUnderLiner: {
       textDecoration: "none",
