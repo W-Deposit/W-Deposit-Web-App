@@ -1,17 +1,13 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Title from "./title";
 import Grid from "@material-ui/core/Grid";
-import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import FormControl from "@material-ui/core/FormControl";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
 import axios from "axios";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
+
 import Typography from "@material-ui/core/Typography";
 
 const validationSchema = yup.object({
@@ -22,26 +18,11 @@ const validationSchema = yup.object({
     .required("Please enter a valid amount in dollars or congolese fc"),
 });
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    depositContext: {
-      flex: 1,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: "center",
-    },
-    margin: {
-      margin: theme.spacing(1),
-    },
-  })
-);
-
 const TopUpChart = () => {
-  const classes = useStyles();
-  const [senderId, setSenderId] = React.useState("");
+  //const classes = useStyles();
+  //const [senderId, setSenderId] = React.useState("");
   const [receiverId, setReceiverId] = React.useState("");
-  const [amount, setAmount] = React.useState("");
+  //const [amount, setAmount] = React.useState("");
   const formik = useFormik({
     initialValues: {
       sender: "",
@@ -61,7 +42,7 @@ const TopUpChart = () => {
 
   return (
     <>
-      <Title>Top W-Deposit Account</Title>
+      <Title>TopUp W-Deposit Account</Title>
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={1}>
           <Grid item xs={6}>
