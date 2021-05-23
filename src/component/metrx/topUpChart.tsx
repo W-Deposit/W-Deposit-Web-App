@@ -12,6 +12,7 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
 
 const validationSchema = yup.object({
   sender: yup.string().required("Please! provide a valid W deposit Account Id"),
@@ -129,6 +130,9 @@ const TopUpChart = () => {
               Proceed
             </Button>
           </Grid>
+          <Typography variant="h3" color="initial">
+            {receiverId}
+          </Typography>
         </Grid>
       </form>
     </>
