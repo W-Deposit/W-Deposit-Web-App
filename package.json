@@ -12,7 +12,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@types/react-router": "^5.1.12",
-    "@types/react-router-dom": "^5.1.7",
+    "@types/react-router-dom": "^5.2.0",
     "@types/yup": "^0.29.11",
     "axios": "^0.21.1",
     "formik": "^2.2.6",

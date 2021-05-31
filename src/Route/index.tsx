@@ -3,13 +3,21 @@ import TopUp from "../screens/sendMoney/topUp";
 import Transactions from "../screens/transactions/index";
 import CheckBalance from "../screens/checkAccount/index";
 import About from "../screens/about/index";
+import Login from "../screens/auth/login"
 export const Routes = [
   {
-    path: "/",
+    path: "/signup",
     name: "signup",
     title: "SIGNUP",
     exact: true,
     component: SignUp,
+  },
+  {
+    path: "/",
+    name: "login",
+    title: "LOGIN",
+    exact: true,
+    component: Login,
   },
   {
     path: "/topUp",

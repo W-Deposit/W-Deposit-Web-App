@@ -21,6 +21,10 @@ import ReceiptIcon from "@material-ui/icons/Receipt";
 import InfoIcon from "@material-ui/icons/Info";
 import AppsIcon from "@material-ui/icons/Apps";
 import { NavLink } from "react-router-dom";
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
+import styled from 'styled-components'
+import PersonIcon from '@material-ui/icons/Person';
 import {
   createStyles,
   makeStyles,
@@ -29,14 +33,19 @@ import {
 } from "@material-ui/core/styles";
 
 const drawerWidth = 220;
-
+const VerticalDivider = styled.div`
+  border-left: 2px solid #00ACED;
+  height: 40px;
+  padding-right: 20px;
+  
+`
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: "flex",
     },
     appBar: {
-      background: "#000000",
+      background: "#FAFCFE",
       zIndex: theme.zIndex.drawer + 1,
       transition: theme.transitions.create(["width", "margin"], {
         easing: theme.transitions.easing.sharp,
@@ -63,7 +72,7 @@ const useStyles = makeStyles((theme: Theme) =>
       whiteSpace: "nowrap",
     },
     drawerOpen: {
-      background: "#000000",
+      background: "#00ACED",
       width: drawerWidth,
       transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
@@ -77,7 +86,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     drawerClose: {
-      background: "#000000",
+      background:"#00ACED" ,
       transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -114,6 +123,9 @@ const useStyles = makeStyles((theme: Theme) =>
     fixedHeight: {
       height: 240,
     },
+    toolbarButtons: {
+      marginLeft: 'auto'
+    },
     removeUnderLiner: {
       textDecoration: "none",
     },
@@ -135,6 +147,7 @@ const SideBar = () => {
   return (
     <>
       <CssBaseline />
+      
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
@@ -142,6 +155,7 @@ const SideBar = () => {
         })}
       >
         <Toolbar>
+       
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -151,11 +165,36 @@ const SideBar = () => {
               [classes.hide]: open,
             })}
           >
-            <MenuIcon />
+            <MenuIcon color="secondary" />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" noWrap color="primary">
             W-DEPOSIT FINANCIAL MANAGMENT TOOL
           </Typography>
+          <div className={classes.toolbarButtons}>
+              
+
+              <IconButton color="inherit">
+              <NotificationsIcon  color="secondary"/>
+              </IconButton>
+
+              <IconButton color="inherit">
+                <VerticalDivider />
+                <IconButton
+                  color="inherit"
+                  aria-haspopup="true"
+                 
+                >
+                  <Typography variant="subtitle2" color="secondary">Vanessa K.</Typography>
+                </IconButton>
+              </IconButton>
+              <IconButton
+                color="inherit"
+                aria-haspopup="true"
+               
+              >
+                <PersonIcon color="secondary"/>
+              </IconButton>
+            </div>
         </Toolbar>
       </AppBar>
       <Drawer
