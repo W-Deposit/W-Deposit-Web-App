@@ -24,13 +24,22 @@ import { NavLink } from "react-router-dom";
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import styled from 'styled-components'
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Fade from '@material-ui/core/Fade';
 import PersonIcon from '@material-ui/icons/Person';
+import {useHistory} from 'react-router-dom';
+
 import {
   createStyles,
   makeStyles,
   useTheme,
   Theme,
 } from "@material-ui/core/styles";
+interface MyObj {
+  token: string;
+
+}
 
 const drawerWidth = 220;
 const VerticalDivider = styled.div`
@@ -123,6 +132,9 @@ const useStyles = makeStyles((theme: Theme) =>
     fixedHeight: {
       height: 240,
     },
+    menu:{
+marginTop:50
+    },
     toolbarButtons: {
       marginLeft: 'auto'
     },
@@ -132,22 +144,52 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 const SideBar = () => {
+  const history = useHistory()
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const openMenu = Boolean(anchorEl);
+  var storage = localStorage.getItem('user-infos');
+  
+ 
 
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+const handleLogout =()=>{
+  localStorage.removeItem("user-infos")
+history.push("/")
+}
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-
+  let list: string[] = [];
   const handleDrawerClose = () => {
     setOpen(false);
   };
   return (
     <>
       <CssBaseline />
-      
+      <Menu
+        id="fade-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={openMenu}
+        onClose={handleClose}
+        TransitionComponent={Fade}
+        className={classes.menu}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+      </Menu>
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
@@ -184,15 +226,17 @@ const SideBar = () => {
                   aria-haspopup="true"
                  
                 >
-                  <Typography variant="subtitle2" color="secondary">Vanessa K.</Typography>
+                
+
+                  <Typography variant="subtitle2" color="secondary" >Vanessa K.</Typography>
                 </IconButton>
               </IconButton>
               <IconButton
                 color="inherit"
                 aria-haspopup="true"
-               
+                onClick={handleClick}
               >
-                <PersonIcon color="secondary"/>
+                <PersonIcon color="secondary" />
               </IconButton>
             </div>
         </Toolbar>

@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import {useHistory} from 'react-router-dom';
 
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -47,6 +48,7 @@ const validationSchema = yup.object({
   });
 
 const Login =()=> {
+  const [message,setMessage] = useState("")
   const history = useHistory()
   async function LoginAuth (data:any){
     const Response = await fetch(`https://w-deposit.herokuapp.com/api/login `, {
@@ -56,20 +58,23 @@ const Login =()=> {
       },
       body: JSON.stringify(data)
     });
+    console.log(JSON.stringify(data))
     
     const jsonData = await Response.json();
     if(Response.status == 200){
       localStorage.setItem("user-infos",JSON.stringify(jsonData))
       history.push("/signup")
     }
-   
-    console.log(jsonData);
+  
+  
 
 }
  
   useEffect(() => {
     if(localStorage.getItem("user-infos")){
       history.push("/signup")
+    }else{
+      history.push("/")
     }
   }, []);
   const classes = useStyles();
@@ -134,7 +139,7 @@ const Login =()=> {
               Login
             </Button>
             </form>
-            
+           
         </Grid>
       
         <Grid item xs={3}>
