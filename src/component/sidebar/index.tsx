@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -21,14 +21,14 @@ import ReceiptIcon from "@material-ui/icons/Receipt";
 import InfoIcon from "@material-ui/icons/Info";
 import AppsIcon from "@material-ui/icons/Apps";
 import { NavLink } from "react-router-dom";
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
-import styled from 'styled-components'
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Fade from '@material-ui/core/Fade';
-import PersonIcon from '@material-ui/icons/Person';
-import {useHistory} from 'react-router-dom';
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import styled from "styled-components";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Fade from "@material-ui/core/Fade";
+import PersonIcon from "@material-ui/icons/Person";
+import { useHistory } from "react-router-dom";
 
 import {
   createStyles,
@@ -38,16 +38,14 @@ import {
 } from "@material-ui/core/styles";
 interface MyObj {
   token: string;
-
 }
 
 const drawerWidth = 220;
 const VerticalDivider = styled.div`
-  border-left: 2px solid #00ACED;
+  border-left: 2px solid #00aced;
   height: 40px;
   padding-right: 20px;
-  
-`
+`;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -95,7 +93,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     drawerClose: {
-      background:"#00ACED" ,
+      background: "#00ACED",
       transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -132,11 +130,11 @@ const useStyles = makeStyles((theme: Theme) =>
     fixedHeight: {
       height: 240,
     },
-    menu:{
-marginTop:50
+    menu: {
+      marginTop: 50,
     },
     toolbarButtons: {
-      marginLeft: 'auto'
+      marginLeft: "auto",
     },
     removeUnderLiner: {
       textDecoration: "none",
@@ -144,15 +142,18 @@ marginTop:50
   })
 );
 const SideBar = () => {
-  const history = useHistory()
+  const history = useHistory();
   const classes = useStyles();
+  const [username, setUsername] = useState("");
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const openMenu = Boolean(anchorEl);
-  var storage = localStorage.getItem('user-infos');
-  
- 
-
-
+  useEffect(() => {
+    const userInfos = localStorage.getItem("user-infos");
+    if (userInfos) {
+      const userInfos_obj = JSON.parse(userInfos);
+      setUsername(userInfos_obj[Object.keys(userInfos_obj)[1]]);
+    }
+  }, []);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -160,17 +161,17 @@ const SideBar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-const handleLogout =()=>{
-  localStorage.removeItem("user-infos")
-history.push("/")
-}
+  const handleLogout = () => {
+    localStorage.removeItem("user-infos");
+    history.push("/");
+  };
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-  let list: string[] = [];
+
   const handleDrawerClose = () => {
     setOpen(false);
   };
@@ -197,7 +198,6 @@ history.push("/")
         })}
       >
         <Toolbar>
-       
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -213,32 +213,26 @@ history.push("/")
             W-DEPOSIT FINANCIAL MANAGMENT TOOL
           </Typography>
           <div className={classes.toolbarButtons}>
-              
+            <IconButton color="inherit">
+              <NotificationsIcon color="secondary" />
+            </IconButton>
 
-              <IconButton color="inherit">
-              <NotificationsIcon  color="secondary"/>
+            <IconButton color="inherit">
+              <VerticalDivider />
+              <IconButton color="inherit" aria-haspopup="true">
+                <Typography variant="subtitle2" color="secondary">
+                  {username}
+                </Typography>
               </IconButton>
-
-              <IconButton color="inherit">
-                <VerticalDivider />
-                <IconButton
-                  color="inherit"
-                  aria-haspopup="true"
-                 
-                >
-                
-
-                  <Typography variant="subtitle2" color="secondary" >Vanessa K.</Typography>
-                </IconButton>
-              </IconButton>
-              <IconButton
-                color="inherit"
-                aria-haspopup="true"
-                onClick={handleClick}
-              >
-                <PersonIcon color="secondary" />
-              </IconButton>
-            </div>
+            </IconButton>
+            <IconButton
+              color="inherit"
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <PersonIcon color="secondary" />
+            </IconButton>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer

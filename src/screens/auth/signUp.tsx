@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -11,9 +11,9 @@ import Deposits from "../../component/metrx/deposit";
 import Orders from "../../component/metrx/order";
 import Chart from "../../component/metrx/chart";
 import SideBar from "../../component/sidebar/index";
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Fade from '@material-ui/core/Fade';
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Fade from "@material-ui/core/Fade";
 const drawerWidth = 220;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -86,6 +86,7 @@ function Copyright() {
 }
 export default function MiniDrawer() {
   const classes = useStyles();
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -100,7 +101,7 @@ export default function MiniDrawer() {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
     <div className={classes.root}>
-       <Menu
+      <Menu
         id="fade-menu"
         anchorEl={anchorEl}
         keepMounted
