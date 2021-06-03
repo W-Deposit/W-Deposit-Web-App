@@ -4,6 +4,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Title from "./title";
 import axios from "axios";
+interface resulsts {
+  _id: string;
+  dateTransaction:string
+}
 function preventDefault(event: { preventDefault: () => void }) {
   event.preventDefault();
 }
@@ -30,15 +34,28 @@ const Deposits = () => {
       setAmount(userInfos_obj[Object.keys(userInfos_obj)[3]]);
 
       const acount_Id = userInfos_obj[Object.keys(userInfos_obj)[2]];
-      axios
-        .post(
-          "https://w-deposit.herokuapp.com/api/history",
-          JSON.stringify({ user: acount_Id })
-        )
-        .then((res) => {
-          console.log(res);
-        });
+
+      axios.post("https://w-deposit.herokuapp.com/api/history", {
+        user: acount_Id
+       
+      })
+      .then((response) => {
+        const data = response.data.dataTransaction
+        setUserToken(data)
+        console.log("FUCK",data);
+
+      }, (error) => {
+        console.log(error);
+      });
+
+
+
+
+
+
+      
     }
+   
   }, []);
 
   return (
@@ -47,9 +64,13 @@ const Deposits = () => {
       <Typography component="p" variant="h4">
         ${amount}
       </Typography>
+      {/* {userToken && userToken.map((resulsts)=>{
+        <Typography variant="h6" color="initial" key={resulsts._id}>{resulsts.client}</Typography>
+      })} */}
       <Typography color="textSecondary" className={classes.depositContext}>
-        {userToken}
+       
       </Typography>
+
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>
           View balance

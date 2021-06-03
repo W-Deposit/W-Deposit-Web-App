@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import clsx from "clsx";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -11,9 +11,7 @@ import Deposits from "../../component/metrx/deposit";
 import Orders from "../../component/metrx/order";
 import Chart from "../../component/metrx/chart";
 import SideBar from "../../component/sidebar/index";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import Fade from "@material-ui/core/Fade";
+
 const drawerWidth = 220;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -86,33 +84,11 @@ function Copyright() {
 }
 export default function MiniDrawer() {
   const classes = useStyles();
-
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
+ 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
     <div className={classes.root}>
-      <Menu
-        id="fade-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={open}
-        onClose={handleClose}
-        TransitionComponent={Fade}
-      >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
-      </Menu>
+      
       <SideBar />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
