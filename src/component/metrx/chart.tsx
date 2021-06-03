@@ -3,24 +3,13 @@ import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Title from "./title";
-let data: any;
+import axios from "axios";
 function preventDefault(event: { preventDefault: () => void }) {
   event.preventDefault();
 }
+let user: any;
 
-const loadUserInfos = async (w_account: any) => {
-  const Response = await fetch(`https://w-deposit.herokuapp.com/api/history `, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ user: w_account }),
-  });
-  console.log("Account", w_account);
-  const jsonData = await Response.json();
-
-  console.log("VANESSA", JSON.stringify(jsonData));
-};
+const loadUserInfos = async (w_account: any) => {};
 
 const useStyles = makeStyles({
   depositContext: {
@@ -30,19 +19,28 @@ const useStyles = makeStyles({
 
 const Deposits = () => {
   const classes = useStyles();
-  const [userToken, setUserToken] = useState("");
+
+  const [userToken, setUserToken] = useState([]);
   const [amount, setAmount] = useState("");
+
   useEffect(() => {
     const userInfos = localStorage.getItem("user-infos");
     if (userInfos) {
       const userInfos_obj = JSON.parse(userInfos);
-
       setAmount(userInfos_obj[Object.keys(userInfos_obj)[3]]);
-      loadUserInfos(userInfos_obj[Object.keys(userInfos_obj)[2]]);
-      console.log(userInfos_obj[Object.keys(userInfos_obj)[2]]);
-      setUserToken(data);
+
+      const acount_Id = userInfos_obj[Object.keys(userInfos_obj)[2]];
+      axios
+        .post(
+          "https://w-deposit.herokuapp.com/api/history",
+          JSON.stringify({ user: acount_Id })
+        )
+        .then((res) => {
+          console.log(res);
+        });
     }
   }, []);
+
   return (
     <React.Fragment>
       <Title>Current merchant balance</Title>
@@ -50,7 +48,6 @@ const Deposits = () => {
         ${amount}
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
-        on 15 March, 2019
         {userToken}
       </Typography>
       <div>

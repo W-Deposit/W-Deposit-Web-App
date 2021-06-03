@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
     buttonProgress: {
       color: green[500],
       position: "absolute",
-      top: "30%",
+      top: "29%",
       left: "50%",
       marginTop: -12,
       marginLeft: -12,
