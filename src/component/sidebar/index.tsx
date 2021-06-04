@@ -22,7 +22,6 @@ import InfoIcon from "@material-ui/icons/Info";
 import AppsIcon from "@material-ui/icons/Apps";
 import { NavLink } from "react-router-dom";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import styled from "styled-components";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -36,9 +35,6 @@ import {
   useTheme,
   Theme,
 } from "@material-ui/core/styles";
-interface MyObj {
-  token: string;
-}
 
 const drawerWidth = 220;
 const VerticalDivider = styled.div`
@@ -290,7 +286,7 @@ const SideBar = () => {
                   fontSize="large"
                 />
               </ListItemIcon>
-              <ListItemText>TopUp Account</ListItemText>
+              <ListItemText>Send money</ListItemText>
             </ListItem>
           </NavLink>
           <NavLink to="/checkBalance" className={classes.removeUnderLiner}>
@@ -303,7 +299,7 @@ const SideBar = () => {
                   fontSize="large"
                 />
               </ListItemIcon>
-              <ListItemText>Check Balance</ListItemText>
+              <ListItemText>Withdraw cash</ListItemText>
             </ListItem>
           </NavLink>
           <NavLink to="/" className={classes.removeUnderLiner}>

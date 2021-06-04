@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Title from "./title";
 import axios from "axios";
@@ -11,22 +10,8 @@ export type ITransaction = {
   montant: string;
   operation: string;
 };
-function preventDefault(event: { preventDefault: () => void }) {
-  event.preventDefault();
-}
-
-const useStyles = makeStyles({
-  depositContext: {
-    flex: 1,
-  },
-  titlecolor: {
-    color: " #ff7400",
-  },
-});
 
 const Deposits = () => {
-  const classes = useStyles();
-
   const [amount, setAmount] = useState("");
 
   useEffect(() => {

@@ -10,8 +10,6 @@ import Title from "./title";
 import axios from "axios";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-// Generate Order Data
-
 export type ITransaction = {
   _id: string;
   dateTransaction: string;
@@ -37,14 +35,12 @@ const useStyles = makeStyles((theme) => ({
 const Orders = () => {
   const classes = useStyles();
   const [userToken, setUserToken] = useState([]);
-  const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const userInfos = localStorage.getItem("user-infos");
     if (userInfos) {
       const userInfos_obj = JSON.parse(userInfos);
-      setAmount(userInfos_obj[Object.keys(userInfos_obj)[3]]);
 
       const acount_Id = userInfos_obj[Object.keys(userInfos_obj)[2]];
 
@@ -73,7 +69,7 @@ const Orders = () => {
           <TableRow>
             <TableCell>Id</TableCell>
             <TableCell>Date</TableCell>
-            <TableCell>Client</TableCell>
+            <TableCell>Destinataire</TableCell>
             <TableCell>Operation</TableCell>
             <TableCell align="right">Amount</TableCell>
           </TableRow>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Link from "@material-ui/core/Link";
-import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Title from "./title";
 import axios from "axios";
@@ -17,35 +16,25 @@ function preventDefault(event: { preventDefault: () => void }) {
   event.preventDefault();
 }
 
-const useStyles = makeStyles({
-  depositContext: {
-    flex: 1,
-  },
-});
-
 const Deposits = () => {
-  const classes = useStyles();
-
-  const [userToken, setUserToken] = useState([]);
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState([]);
 
   useEffect(() => {
     const userInfos = localStorage.getItem("user-infos");
     if (userInfos) {
       const userInfos_obj = JSON.parse(userInfos);
-      setAmount(userInfos_obj[Object.keys(userInfos_obj)[3]]);
-
-      const acount_Id = userInfos_obj[Object.keys(userInfos_obj)[2]];
+      const token_bear = userInfos_obj[Object.keys(userInfos_obj)[0]];
 
       axios
-        .post("https://w-deposit.herokuapp.com/api/history", {
-          user: acount_Id,
+        .get("https://w-deposit.herokuapp.com/api/me", {
+          headers: {
+            token: token_bear, //the token is a variable which holds the token
+          },
         })
         .then(
           (response) => {
-            const data = response.data.dataTransaction;
-            setUserToken(data);
-            console.log("FUCK", data);
+            const responseData = response.data.wdeposit;
+            setAmount(JSON.stringify(responseData));
           },
           (error) => {
             console.log(error);
@@ -58,7 +47,7 @@ const Deposits = () => {
     <React.Fragment>
       <Title>Current merchant balance</Title>
       <Typography component="p" variant="h4">
-        ${amount}
+        ${amount.toString()}
       </Typography>
       {/* {userToken && userToken.map((resulsts)=>{
         <Typography variant="h6" color="initial" key={resulsts._id}>{resulsts.client}</Typography>

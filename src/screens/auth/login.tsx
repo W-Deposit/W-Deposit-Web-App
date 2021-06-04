@@ -10,7 +10,6 @@ import { useHistory } from "react-router-dom";
 import clsx from "clsx";
 import { green } from "@material-ui/core/colors";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -109,7 +108,7 @@ const Login = () => {
     } else {
       history.push("/");
     }
-  }, []);
+  }, [history]);
 
   const formik = useFormik({
     initialValues: {

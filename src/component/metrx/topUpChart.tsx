@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import Title from "./title";
 import Grid from "@material-ui/core/Grid";
@@ -8,25 +8,34 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
-
+import { green } from "@material-ui/core/colors";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
-import WarningIcon from "@material-ui/icons/Warning";
 import { useHistory } from "react-router-dom";
 import { TransitionProps } from "@material-ui/core/transitions";
 import Alert from "@material-ui/lab/Alert";
-
 let accountID: string;
 const useStyles = makeStyles({
   depositContext: {
     flex: 1,
   },
+  error: {
+    marginTop: 20,
+  },
   dialogTitle: {
-    paddingLeft: 180,
+    paddingLeft: 50,
+  },
+  buttonProgress: {
+    color: green[500],
+    position: "absolute",
+    top: "29%",
+    left: "50%",
+    marginTop: -12,
+    marginLeft: -12,
   },
 });
 const validationSchema = yup.object({
@@ -56,18 +65,9 @@ const TopUpChart = () => {
     history.push("/signup");
   };
   const [loading, setLoading] = useState(true);
-  const [account, setAccount] = useState("");
+  const [error, setError] = useState("");
   //const [amount, setAmount] = React.useState("");
 
-  useEffect(() => {
-    const userInfos = localStorage.getItem("user-infos");
-
-    if (userInfos) {
-      const userInfos_obj = JSON.parse(userInfos);
-
-      const account_Id = userInfos_obj[Object.keys(userInfos_obj)[2]];
-    }
-  }, []);
   const userInfos = localStorage.getItem("user-infos");
 
   if (userInfos) {
@@ -86,20 +86,22 @@ const TopUpChart = () => {
 
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      setAccount(JSON.stringify(formik.values));
-      console.log("VALUES", JSON.stringify(formik.values));
       const data = JSON.stringify(formik.values);
       console.log("DATA", data);
       axios
-        .post("https://w-deposit.herokuapp.com/api/envoyer", {
-          name: "",
-          parts: "",
-        })
+        .post("https://w-deposit.herokuapp.com/api/envoyer", values)
         .then((response) => {
-          console.log(response);
+          setLoading(false);
+          console.log("message", response.data);
+          if (response.status === 200) {
+            handleClickOpen();
+          }
         })
         .catch((error) => {
-          console.log(error.response);
+          if (error.response.data.msg) {
+            setError(error.response.data.msg);
+            console.log("response", error.response.data.msg);
+          }
         });
     },
   });
@@ -107,7 +109,7 @@ const TopUpChart = () => {
   return (
     <>
       <Title>TopUp W-Deposit Account</Title>
-      {account}
+
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={1}>
           <Grid item xs={6}>
@@ -195,8 +197,8 @@ const TopUpChart = () => {
             <DialogContent>
               <DialogContentText id="alert-dialog-slide-description">
                 <Alert severity="success">
-                  Your transaction have been succesfull!Thank you for choosing
-                  W-DEPOSIT(:
+                  Your transaction have been succesfull!<br></br>Thank you for
+                  choosing W-DEPOSIT(:
                 </Alert>
               </DialogContentText>
             </DialogContent>
@@ -208,6 +210,11 @@ const TopUpChart = () => {
           </Dialog>
         </Grid>
       </form>
+      {error ? (
+        <Alert severity="error" className={classes.error}>
+          {error.toString()}
+        </Alert>
+      ) : null}
     </>
   );
 };

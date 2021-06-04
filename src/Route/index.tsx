@@ -3,7 +3,7 @@ import TopUp from "../screens/sendMoney/topUp";
 import Transactions from "../screens/transactions/index";
 import CheckBalance from "../screens/checkAccount/index";
 import About from "../screens/about/index";
-import Login from "../screens/auth/login"
+import Login from "../screens/auth/login";
 export const Routes = [
   {
     path: "/signup",

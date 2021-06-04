@@ -8,7 +8,6 @@ import axios from "axios";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
 
 const validationSchema = yup.object({
   account: yup
@@ -19,7 +18,6 @@ const validationSchema = yup.object({
 const TopUpChart = () => {
   // const classes = useStyles();
   // const [senderId, setSenderId] = React.useState("");
-  const [receiverId, setReceiverId] = React.useState("");
   //const [amount, setAmount] = React.useState("");
   const formik = useFormik({
     initialValues: {
@@ -73,9 +71,6 @@ const TopUpChart = () => {
               Check account availability
             </Button>
           </Grid>
-          <Typography variant="h3" color="initial">
-            {receiverId}
-          </Typography>
         </Grid>
       </form>
     </>
