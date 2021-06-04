@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -11,7 +11,6 @@ import Deposits from "../../component/metrx/deposit";
 import Orders from "../../component/metrx/order";
 import Chart from "../../component/metrx/chart";
 import SideBar from "../../component/sidebar/index";
-
 const drawerWidth = 220;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -84,11 +83,10 @@ function Copyright() {
 }
 export default function MiniDrawer() {
   const classes = useStyles();
- 
+
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
     <div className={classes.root}>
-      
       <SideBar />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />

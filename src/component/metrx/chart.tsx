@@ -4,16 +4,18 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Title from "./title";
 import axios from "axios";
-interface resulsts {
+
+export type ITransaction = {
   _id: string;
-  dateTransaction:string
-}
+  dateTransaction: string;
+  client: string;
+  destinataire: string;
+  montant: string;
+  operation: string;
+};
 function preventDefault(event: { preventDefault: () => void }) {
   event.preventDefault();
 }
-let user: any;
-
-const loadUserInfos = async (w_account: any) => {};
 
 const useStyles = makeStyles({
   depositContext: {
@@ -35,27 +37,21 @@ const Deposits = () => {
 
       const acount_Id = userInfos_obj[Object.keys(userInfos_obj)[2]];
 
-      axios.post("https://w-deposit.herokuapp.com/api/history", {
-        user: acount_Id
-       
-      })
-      .then((response) => {
-        const data = response.data.dataTransaction
-        setUserToken(data)
-        console.log("FUCK",data);
-
-      }, (error) => {
-        console.log(error);
-      });
-
-
-
-
-
-
-      
+      axios
+        .post("https://w-deposit.herokuapp.com/api/history", {
+          user: acount_Id,
+        })
+        .then(
+          (response) => {
+            const data = response.data.dataTransaction;
+            setUserToken(data);
+            console.log("FUCK", data);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
     }
-   
   }, []);
 
   return (
@@ -67,9 +63,6 @@ const Deposits = () => {
       {/* {userToken && userToken.map((resulsts)=>{
         <Typography variant="h6" color="initial" key={resulsts._id}>{resulsts.client}</Typography>
       })} */}
-      <Typography color="textSecondary" className={classes.depositContext}>
-       
-      </Typography>
 
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>

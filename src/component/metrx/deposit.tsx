@@ -1,9 +1,16 @@
-import React from "react";
-import Link from "@material-ui/core/Link";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Title from "./title";
-
+import axios from "axios";
+export type ITransaction = {
+  _id: string;
+  dateTransaction: string;
+  client: string;
+  destinataire: string;
+  montant: string;
+  operation: string;
+};
 function preventDefault(event: { preventDefault: () => void }) {
   event.preventDefault();
 }
@@ -19,19 +26,44 @@ const useStyles = makeStyles({
 
 const Deposits = () => {
   const classes = useStyles();
+
+  const [amount, setAmount] = useState("");
+
+  useEffect(() => {
+    const userInfos = localStorage.getItem("user-infos");
+    if (userInfos) {
+      const userInfos_obj = JSON.parse(userInfos);
+      setAmount(userInfos_obj[Object.keys(userInfos_obj)[3]]);
+
+      const account_Id = userInfos_obj[Object.keys(userInfos_obj)[2]];
+
+      axios
+        .post("https://w-deposit.herokuapp.com/api/history", {
+          user: account_Id,
+        })
+        .then(
+          (response) => {
+            const data = response.data.dataTransaction;
+
+            console.log("FUCK", data);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
+      setAmount(account_Id);
+    }
+  }, []);
   return (
     <>
       <Title>Recent Deposits</Title>
-      <Typography component="p" variant="h4">
-        $0,00.00
-      </Typography>
-      <Typography color="textSecondary" className={classes.depositContext}>
-        on 15 March, 2019
-      </Typography>
+
       <div>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          View balance
-        </Link>
+        <Typography component="p" variant="h6">
+          W-ID:${amount}
+        </Typography>
+        <Typography component="p" variant="h4"></Typography>
       </div>
     </>
   );
