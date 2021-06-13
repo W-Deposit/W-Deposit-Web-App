@@ -39,7 +39,7 @@ const Deposits = () => {
 
       setAmount(account_Id);
     }
-  }, []);
+  }, [amount]);
   return (
     <>
       <Title>Recent Deposits</Title>

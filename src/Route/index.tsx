@@ -4,6 +4,7 @@ import Transactions from "../screens/transactions/index";
 import CheckBalance from "../screens/checkAccount/index";
 import About from "../screens/about/index";
 import Login from "../screens/auth/login";
+import MyAccount from "../screens/myAccount/index";
 export const Routes = [
   {
     path: "/signup",
